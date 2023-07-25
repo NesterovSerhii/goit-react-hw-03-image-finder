@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
-import { Modal } from '../Modal/Modal';
-import styled from './Image.GalleryItem.css'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from './ImageGalleryItem.module.css'
 
-export const ImageGalleryItem = ({ image }) => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
+const ImageGalleryItem = ({ image, onClick }) => {
+  const handleClick = () => {
+    onClick(image.largeImageURL);
   };
 
   return (
-    <>
-      <li key={image.id} className={styled.imageGalleryItem}>
-        <img className={styled['imageGalleryItem-image']} src={image.webformatURL} alt="" onClick={handleOpenModal} />
-      </li>
-      {isModalOpen && (
-        <Modal largeImageURL={image.largeImageURL} onClose={handleCloseModal} />
-      )}
-    </>
+    <li className={styled.imageGalleryItem} onClick={handleClick}>
+      <img
+        className={styled['imageGalleryItem-image']}
+        src={image.webformatURL}
+        alt={image.tags}
+      />
+    </li>
   );
 };
+
+ImageGalleryItem.propTypes = {
+  image: PropTypes.shape({
+    webformatURL: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+  }).isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+export { ImageGalleryItem };
