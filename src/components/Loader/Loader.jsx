@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from './Loader.module.css'
 import { Dna } from 'react-loader-spinner';
 
 const Loader = () => {
@@ -10,7 +11,7 @@ const Loader = () => {
   width="80"
   ariaLabel="dna-loading"
   wrapperStyle={{}}
-  wrapperClass="dna-wrapper"
+  wrapperClass={styled.wrapper}
 />
     </div>
   );
